@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html lang="en">
+  <head>
+	<title>Listee</title>
+    <link href="colored_boxes.css" rel="stylesheet" type="text/css">
+  </head>
+
+<body>
+<div class="list">
+List of things you need
+ <ul id="data_store">
+    {% for item in data["needs"] %}
+        <li>{{ item }}</li>
+    {% endfor %}
+    </ul>
+</div>
+
+<div class="list">
+List of things you requested
+ <ul id="data_store">
+    {% for item in data["purchases"] %}
+        <li>{{ item }}</li>
+    {% endfor %}
+    </ul>
+</div>
+
+<div class="form">
+<form action="/add_item/" method="POST">
+   Item to add to list: <input name="add" type="text" />
+   <input type="submit" />
+</form>
+</div>
+
+<div class="form">
+<form action="/log_purchase/" method="POST">
+	Log purchase: <input name="purchase" type="text" />
+	How much u spent?: <input name="spent" type="text" />
+   <input type="submit" />
+</form>
+</div>
+
+</body>
+</html>
