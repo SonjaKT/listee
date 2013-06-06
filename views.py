@@ -29,11 +29,13 @@ def add_item():
 	db.close()
 	return render_template("success_redirect.html", data={})
 
-'''
 @app.route('/log_purchase/', methods=['POST'])
 def log_purchase():
-	pass
-'''
+	db = shelve.open("listee_dict")
+	db[str(request.form["item"])] = str(request.form["price"])
+	db.close()
+	return render_template("success_redirect.html", data={})
+
 
 if __name__ == '__main__':
     app.run(debug=True)

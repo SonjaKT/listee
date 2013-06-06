@@ -19,16 +19,17 @@ List of things you need
 </div>
 
 <div class="list">
-List of things you requested
+List of things you bought, how much you spent in USD
  <ul id="data_store">
     {% for item in data["purchases"] %}
-        <li>{{ item }}</li>
+        <li>{{ "{0}, ${1}".format(item[0],item[1]) }}</li>
     {% endfor %}
     </ul>
 </div>
 
 
 <noscript> Hi. If you can see this, then you don't have javascript. You should just give up on this page and read Neuromancer: <a href="http://project.cyberpunk.ru/idb/neuromancer.html">http://project.cyberpunk.ru/idb/neuromancer.html</a></noscript>
+
 <div class="form">
 <form name="add" action="/add_item/" method="POST">
    Item to add to list: <input name="item" type="text" />
@@ -37,7 +38,7 @@ List of things you requested
 </div>
 
 <div class="form">
-<form name="purchase" action="/log_purchase" method="POST">
+<form name="purchase" action="/log_purchase/" method="POST">
 	Log purchase: <input name="item" type="text" />
 	How much u spent?: <input name="price" type="text" />
    <input type="submit" />
