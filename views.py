@@ -17,16 +17,24 @@ def index():
 		if i[1]: data_store["purchases"].append(i)
 	db.close()
 	return render_template("index.html", data=data_store)
-'''
+
+@app.route('/work_bitches')
+def f():
+	return 'WORK'
+
 @app.route('/add_item/', methods=['POST'])
 def add_item():
-	pass
+	db = shelve.open("listee_dict")
+	db[str(request.form["add"])] = ""
+	db.close()
+	return "item Added!"
 
+'''
 @app.route('/log_purchase/', methods=['POST'])
 def log_purchase():
 	pass
 '''
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
 

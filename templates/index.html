@@ -2,10 +2,13 @@
 <html lang="en">
   <head>
 	<title>Listee</title>
-    <link href="colored_boxes.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../static/css/colored_boxes.css">
   </head>
 
 <body>
+
+<a href="/work_bitches">WORK</a>
+
 <div class="list">
 List of things you need
  <ul id="data_store">
@@ -32,7 +35,7 @@ List of things you requested
 </div>
 
 <div class="form">
-<form action="/log_purchase/" method="POST">
+<form action="/log_purchase" method="POST">
 	Log purchase: <input name="purchase" type="text" />
 	How much u spent?: <input name="spent" type="text" />
    <input type="submit" />

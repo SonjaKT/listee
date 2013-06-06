@@ -1,0 +1,19 @@
+.one,.two,.three {height: 200px; width: 200px;}
+
+.form {background: yellow;}
+.list {background: grey;}
+
+.two {background: grey; z-index: -1; position: relative; top: 10px; left:10px; /*margin: 10px 0 0 10px;*/} /*lies on top of the stuff under it*/
+/*try margin: 10px 0 0 10px; instead of top, left and it will push three down*/
+
+
+.three{background:lightgrey;}
+
+.four {position: absolute;
+	background:green;
+	bottom:0;
+	right:0;
+	width: 50px; 
+	height: 50px;}
+
+/*z-index is the order it stacks, otherwise the later the item appears in the html the more on top the thing is. z-index = 0 is static things, so z-index<0 will be behind things*/
