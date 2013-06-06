@@ -25,9 +25,9 @@ def f():
 @app.route('/add_item/', methods=['POST'])
 def add_item():
 	db = shelve.open("listee_dict")
-	db[str(request.form["add"])] = ""
+	db[str(request.form["item"])] = ""
 	db.close()
-	return "item Added!"
+	return render_template("success_redirect.html", data={})
 
 '''
 @app.route('/log_purchase/', methods=['POST'])

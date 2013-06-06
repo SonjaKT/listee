@@ -27,17 +27,19 @@ List of things you requested
     </ul>
 </div>
 
+
+<noscript> Hi. If you can see this, then you don't have javascript. You should just give up on this page and read Neuromancer: <a href="http://project.cyberpunk.ru/idb/neuromancer.html">http://project.cyberpunk.ru/idb/neuromancer.html</a></noscript>
 <div class="form">
-<form action="/add_item/" method="POST">
-   Item to add to list: <input name="add" type="text" />
+<form name="add" action="/add_item/" method="POST">
+   Item to add to list: <input name="item" type="text" />
    <input type="submit" />
 </form>
 </div>
 
 <div class="form">
-<form action="/log_purchase" method="POST">
-	Log purchase: <input name="purchase" type="text" />
-	How much u spent?: <input name="spent" type="text" />
+<form name="purchase" action="/log_purchase" method="POST">
+	Log purchase: <input name="item" type="text" />
+	How much u spent?: <input name="price" type="text" />
    <input type="submit" />
 </form>
 </div>
