@@ -7,8 +7,6 @@
 
 <body>
 
-<a href="/work_bitches">WORK</a>
-
 <div class="list">
 List of things you need
  <ul id="data_store">
@@ -24,6 +22,7 @@ List of things you bought, how much you spent in USD
     {% for item in data["purchases"] %}
         <li>{{ "{0}, ${1}".format(item[0],item[1]) }}</li>
     {% endfor %}
+		<li> Total spent: ${{ data["outlays"] }}</li>
     </ul>
 </div>
 
@@ -39,8 +38,8 @@ List of things you bought, how much you spent in USD
 
 <div class="form">
 <form name="purchase" action="/log_purchase/" method="POST">
-	Log purchase: <input name="item" type="text" />
-	How much u spent?: <input name="price" type="text" />
+	Item you bought: <input name="item" type="text" /><br>
+	How much you spent on this item in USD: $<input name="price" type="text" />
    <input type="submit" />
 </form>
 </div>

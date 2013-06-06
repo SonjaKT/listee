@@ -10,11 +10,14 @@ app = Flask(__name__)
 @app.route('/')
 def index():
 	db = shelve.open("listee_dict")
-	data_store = {"needs": [], "purchases": []}
+	data_store = {"needs": [], "purchases": [], "outlays":0.0}
+	outlays = 0.0
 	for i in db.items():
 		if not i[1]: data_store["needs"].append(i[0])
 	for i in db.items():
-		if i[1]: data_store["purchases"].append(i)
+		if i[1]: 
+			data_store["purchases"].append(i)
+			data_store["outlays"] += float(i[1])
 	db.close()
 	return render_template("index.html", data=data_store)
 
