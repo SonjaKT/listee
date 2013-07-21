@@ -75,16 +75,11 @@ def settle_up(u_mail, group, method):
 	if method == "direct":	user_owes = credits - find_debts(u_mail)
 	if method == "even weight":
 		members = r.lrange(group, 0, -1)
-		for email in members:
-			greedy_pigs = greedy_pigs + find_credits(email)
+		for email in members: greedy_pigs = greedy_pigs + find_credits(email)
 		user_owes = credits - greedy_pigs/len(members)
 	return user_owes
 
-#def cred_lookup(email):
-#	message = r.lrange(email, 0, 1)
-#	return render_template("email_sent.html", data = message)
-
-#	r.rpush(request_no, r_max_price)
+#r.rpush(request_no, r_max_price)
 #request_no : [rqstr, item, max_price, price_paid, buyer]
 #email.r : [request_no]
 #item : [request_no]

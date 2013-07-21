@@ -5,3 +5,5 @@ d
 listee_dict
 users_dict
 user_table
+*.rdb
+send_mail.py
