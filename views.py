@@ -2,44 +2,60 @@ from flask import render_template
 from flask import Flask
 from flask import jsonify
 from flask import request
-import shelve
+import redis
+import database as d
 
 # create the application
 app = Flask(__name__)
 
-@app.route('/')
-def index():
-	db = shelve.open("listee_dict")
-	data_store = {"needs": [], "purchases": [], "outlays":0.0}
-	outlays = 0.0
-	for i in db.items():
-		if not i[1]: data_store["needs"].append(i[0])
-	for i in db.items():
-		if i[1]: 
-			data_store["purchases"].append(i)
-			data_store["outlays"] += float(i[1])
-	db.close()
+def do_it():
+	app.run(debug=True)	
+
+r=redis.Redis("localhost")
+#r.set("request_no", 1)
+
+def profile(email, group = "ONE_GROUP"):
+	username = r.lrange(email, 0, 0)
+	needs = d.coallate_active_requests(group)
+	outlays = d.find_credits(email)
+	purchases = d.purchases(email) #list of tuples (item, price)
+	data_store = {"email": email, "needs": needs, "purchases": purchases, "outlays":outlays, "username": username}
 	return render_template("index.html", data=data_store)
 
-@app.route('/work_bitches')
-def f():
-	return 'WORK'
+@app.route('/')
+def listee():
+	return render_template("login.html")
+
+@app.route('/login_test/', methods = ["POST"])
+def login_test():
+	email = str(request.form["email"])
+	password = str(request.form["password"])
+	if r.exists(email): 
+		if r.lrange(email, 1, 1) == [password]: return profile(email)
+		else: return render_template("no_password.html", data={"username": r.lrange(email, 0, 0)})
+	else: 
+		return render_template("no_email.html", data = {"email":email})
+
+@app.route('/login_create/', methods=['POST'])
+def add_user():
+	email = str(request.form["email"])
+	username = str(request.form["username"])
+	password = str(request.form["password1"])
+	d.add_user(username, password, email)
+	return profile(email)
 
 @app.route('/add_item/', methods=['POST'])
 def add_item():
-	db = shelve.open("listee_dict")
-	db[str(request.form["item"])] = ""
-	db.close()
-	return render_template("success_redirect.html", data={})
+	item = str(request.form["item"])
+	email = str(request.form["email"])
+	d.add_request(item, email)
+	return profile(email)
 
 @app.route('/log_purchase/', methods=['POST'])
 def log_purchase():
-	db = shelve.open("listee_dict")
-	db[str(request.form["item"])] = str(request.form["price"])
-	db.close()
-	return render_template("success_redirect.html", data={})
-
+	email = str(request.form["email"])
+	d.log_purchase(str(request.form["item"]), float(request.form["price"]), email)
+	return profile(email)
 
 if __name__ == '__main__':
-    app.run(debug=True)
-
+	do_it()

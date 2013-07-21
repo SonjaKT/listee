@@ -1,17 +1,16 @@
 import shelve
 
+def add_new_request(string):
+	db[string] = ""
 
-	def add_new_request(string):
-		db[string] = ""
+def log_purchase(string, spent):
+	db[string] = spent
 
-	def log_purchase(string, spent):
-		db[string] = spent
-
-	def sum_purchases():
-		spent = 0
-		for i in db.items():
-			if i[1]: spent = spent + float(i[1])
-		return spent
+def sum_purchases():
+	spent = 0
+	for i in db.items():
+		if i[1]: spent = spent + float(i[1])
+	return spent
 
 
 def do_it():

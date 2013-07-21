@@ -8,30 +8,31 @@
 <body>
 
 <div class="list">
-List of things you need
+Hi {{ data["username"][0] }}<br><br>
+List of things you need:
  <ul id="data_store">
     {% for item in data["needs"] %}
-        <li>{{ item }}</li>
+        <li>{{ item[0] }}</li>
     {% endfor %}
-    </ul>
+ </ul>
 </div>
 
 <div class="list">
 List of things you bought, how much you spent in USD
  <ul id="data_store">
     {% for item in data["purchases"] %}
-        <li>{{ "{0}, ${1}".format(item[0],item[1]) }}</li>
+        <li>{{ "{0}, ${1}".format(item[0], item[1]) }}</li>
     {% endfor %}
-		<li> Total spent: ${{ data["outlays"] }}</li>
-    </ul>
+</ul><br>
+Total spent: ${{ data["outlays"] }}
 </div>
-
 
 <noscript> Hi. If you can see this, then you don't have javascript. You should just give up on this page and read Neuromancer: <a href="http://project.cyberpunk.ru/idb/neuromancer.html">http://project.cyberpunk.ru/idb/neuromancer.html</a></noscript>
 
 <div class="form">
 <form name="add" action="/add_item/" method="POST">
-   Item to add to list: <input name="item" type="text" />
+	Item to add to list: <input name="item" type="text" />
+	Requestor: <input name="email" type="text" value = {{ data["email"] }} />
    <input type="submit" />
 </form>
 </div>
@@ -39,7 +40,8 @@ List of things you bought, how much you spent in USD
 <div class="form">
 <form name="purchase" action="/log_purchase/" method="POST">
 	Item you bought: <input name="item" type="text" /><br>
-	How much you spent on this item in USD: $<input name="price" type="text" />
+	How much you spent on this item in USD: $<input name="price" type="text" /><br>
+	Purchasor: <input name="email" type="text" value = {{ data["email"] }} />
    <input type="submit" />
 </form>
 </div>

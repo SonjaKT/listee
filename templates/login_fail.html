@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html lang="en">
+  <head>
+	<title>ListeeLogin</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/colored_boxes.css">
+</head>
+
+<body>
+Hmm ... couldn't find that combination of username and password. Try again:
+<div class="form">
+<form name="login" action="/login_test/" method="POST">
+	Name: <input name="username" type="text" /><br>
+	Password: <input name="password" type="text" />
+   <input type="submit" />
+</form></div>
+
+or enter your email address and I'll resend you your information:
+<div class="form">
+<form name="email_retrieval" action="/email_retrieval/" method="POST">
+Email: <input name="email" type="text" />
+</form>
+</div>
+
+If you don't have an account make one:
+<div class="form">
+<form name="login" action="/login_create/" method="POST">
+	Choose your name: <input name="username" type="text" /><br>
+	Choose your Password: <input name="password1" type="text" /><br>
+	Quiz! What is your password? lol: <input name="password2" type="text" />
+	What is your email addy? <input name="email" type="text" /> (In case you forget your password or user name, or I just want to email you at 11:30 at night and check in.) 
+   <input type="submit" />
+</form>
+</div>
+</body>
+</html>

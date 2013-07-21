@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html lang="en">
+  <head>
+	<title>Listee_Login</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/colored_boxes.css">
+  </head>
+
+<body>
+
+<h1> Hi Welcome to Listee. If you already have an account sign in:</h1>
+<div class="form">
+<form name="login" action="/login_test/" method="POST">
+	Email address: <input name="email" type="text"/><br>
+	Password: <input name="password" type="text" />
+   <input type="submit" />
+</form></div>
+
+<h1>If you don't have an account make one:</h1>
+<div class="form">
+<form name="login" action="/login_create/" method="POST">
+	Choose your username: <input name="username" type="text" /><br>
+	Choose your Password: <input name="password1" type="text" /><br>
+	Quiz! What is your password?: <input name="password2" type="text" /><br>
+	What is your email addy? <input name="email" type="text" />
+   <input type="submit" />
+</form>
+</div>
+
+</body>
+</html>
